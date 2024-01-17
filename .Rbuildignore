@@ -1,0 +1,6 @@
+^renv$
+^renv\.lock$
+^CadenzaAnalytics\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^\.vscode$

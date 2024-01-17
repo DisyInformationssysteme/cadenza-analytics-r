@@ -1,0 +1,31 @@
+Package: CadenzaAnalytics
+Title: Create An API For The Cadenza Analytics Extension With Plumber
+Version: 0.2.0
+Authors@R: c(
+    person("Matthias", "Theobald", email = "matthias.theobald@disy.net", role = c("aut", "cre")),
+    person("Lossow", "Stefan", email = "stefan.lossow@disy.net", role = c("aut")),
+    person("Herrmann", "Marius", email = "marius.herrmann@disy.net", role = c("aut")),
+    person("Babenhauserheide", "Arne", email = "arne.babenhauserheide@disy.net", role = c("aut")),
+    person("Disy", role = c("cph"))
+  )
+Description: Cadenza Analytics Extensions enable complex data analytics to be integrated via external services. This package provides the tooling to create such Analytics Extensions easily from R.
+License: Apache License (>= 2)
+Depends:
+    R (>= 4.1.0)
+Imports:
+    dplyr,
+    ggplot2,
+    glue,
+    jsonlite,
+    plumber,
+    purrr,
+    rlang,
+    stringi,
+    tibble,
+    vroom,
+    webutils
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests:
+    sf
