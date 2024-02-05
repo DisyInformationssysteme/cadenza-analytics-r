@@ -16,6 +16,9 @@ is.sfc <- function(x) { # nolint prefer consistency
   inherits(x, "sfc")
 }
 
+#'As Character
+#'@importFrom sf st_as_text
+#'@export
 as.character.sfc <- function(x, ...) {
   sf::st_as_text(x, ...)
 }

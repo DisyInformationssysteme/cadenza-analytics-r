@@ -125,7 +125,7 @@ as_cadenza_visualization <- function(res, plotfile) {
 #' @describeIn serializer Serialize the multipart-form required by
 #'     Cadenza for visualizations
 #'
-#' @importFrom
+#' @importFrom plumber serializer_octet
 #' @export
 
 serializer_cadenza_visualization <- function(...) { # nolint symbol length
