@@ -34,33 +34,27 @@ Build time dependencies:
 RStudio provides the most common development environment for R:
 https://posit.co/download/rstudio-desktop/
 
-## Installation and setup in plain R
+## Installation and Setup
 
-After cloning the git repository, install the dependencies and the
-package by sourcing `install_CadenzaAnalytics.R` **in an R session**
-inside the cloned directory (`cadenza-analytics-r`):
+You can install this package by running
 
-```r
-source("install_CadenzaAnalytics.R")
+```
+devtools::install_github("https://github.com/DisyInformationssysteme/cadenza-analytics-r")
 ```
 
-The file `install_CadenzaAnalytics.R` contains some
-user-settings. Adjust those to your needs.
-
-## Installation and setup in R-Studio
-
-After cloning the git repository, use
+Once installed, include the package as you normally would:
 
 ```r
 library(CadenzaAnalytics)
 ```
 
-to import the package into R. Note, that `CadenzaAnalytics.Rproj` needs to
-be in the same directory as your R-script for this to work.
+To generate demo code that you can tweak and build your own extension on, simply run:
 
-Cadenza Analytics R uses swagger and plumber in tandem to enable users
-to host their own analytics extensions. To start, either use
-`install_CadenzaAnalytics.R` or host your own endpoints:
+```r
+CadenzaAnalytics::create_analytics_extension()
+```
+
+`CadenzaAnalytics` uses [swagger](https://swagger.io) and [plumber](https://www.rplumber.io) in tandem to enable users to host their own analytics extensions. Hosting endpoints generally looks like this:
 
 ````r
 root <- Plumber$new()
@@ -71,6 +65,12 @@ pr_mount(root, '/the-route', b)
 options("plumber.port" = 9292)
 root$run()
 ````
+
+To generate a Dockerfile that can help you deploy your extension using Docker, run
+
+```r
+CadenzaAnalytics::create_dockerfile()
+```
 
 # Defining an Analytics Extension
 
