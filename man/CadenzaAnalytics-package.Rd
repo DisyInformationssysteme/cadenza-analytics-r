@@ -16,6 +16,7 @@ Cadenza Analytics Extensions enable complex data analytics to be integrated via 
 Authors:
 \itemize{
   \item Lossow Stefan \email{stefan.lossow@disy.net}
+  \item Herrmann Marius \email{marius.herrmann@disy.net}
   \item Babenhauserheide Arne \email{arne.babenhauserheide@disy.net}
 }
 
