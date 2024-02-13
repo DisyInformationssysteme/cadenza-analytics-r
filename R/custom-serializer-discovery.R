@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-library("plumber", quietly = TRUE)
-
 #' Build the Discovery GET-response.
 #'
 #' @param discovery A list with an extension of a extension_references.

@@ -10,14 +10,17 @@ serializer_multi(serialize_fn, boundary = NULL, ...)
 serializer_cadenza_enrichment_calculation(...)
 }
 \arguments{
-\item{serialize_fn}{Function with which the individual parts will be serialized.
-The function has to return a vector or list of strings and has to have the attribute
-\code{type} with the HTML content type of each part.}
+\item{serialize_fn}{Function with which the individual parts will
+be serialized.  The function has to return a vector or list of
+strings and has to have the attribute \code{type} with the HTML
+content type of each part.}
 
-\item{boundary}{The boundary string with which the parts are to be separated.
-If \code{NULL} a random string of 30 characters will be generated and used.}
+\item{boundary}{The boundary string with which the parts are to be
+separated.  If \code{NULL} a random string of 30 characters will be
+generated and used.}
 
-\item{...}{Additional arguments to be passed to the serialize function.}
+\item{...}{Additional arguments to be passed to the serialize
+function.}
 }
 \description{
 Custom serializers
@@ -30,3 +33,12 @@ Custom serializers
 enrichments and calculations
 
 }}
+\examples{
+pr() |>
+  pr_get(
+    "/form",
+    handler = function() list(data.frame(x = rnorm(10), y = runif(10)),
+                              list(param = "b", value = 12)),
+    serializer = serializer_multi(
+      serialiize_fn = function(val) lapply(val, )))
+}
