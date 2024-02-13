@@ -4,17 +4,19 @@
 \alias{as_cadenza_visualization}
 \title{Prepare visualization results for Cadenza}
 \usage{
-as_cadenza_visualization(plotfile)
+as_cadenza_visualization(res, plotfile)
 }
 \arguments{
+\item{res}{The Plumber response construct}
+
 \item{plotfile}{The plot file created in the Plumber R file}
 }
 \value{
-res The Plumber reponse construct
+res The Plumber response construct adjusted
 }
 \description{
 Prepare visualization results for Cadenza
 }
 \examples{
-res <- as_cadenza_visualization(plotfile)
+res <- as_cadenza_visualization(res, plotfile)
 }

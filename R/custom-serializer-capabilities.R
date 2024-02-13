@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-library("plumber", quietly = TRUE)
-
 #' Build the Capabilities GET-response.
 #'
 #' @param extension A list of a parameters of the analytics extension.

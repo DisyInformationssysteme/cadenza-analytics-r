@@ -16,14 +16,17 @@ parser_delim(...)
 A list with the following elements:
 \itemize{
 \item data: the data sent by Cadenza; Can be a dataframe or a list
-\item column_info: a dataframe with metadata regarding the columns in data if it is a dataframe
+\item column_info: a dataframe with metadata regarding the columns in data
+if it is a dataframe
 \item metadata: a list with all metadata supplied by Cadenza
-\item ... Further elements linked to parameters specified in the extension description
+\item ... Further elements linked to parameters specified
+in the extension description
 }
 }
 \description{
-A parser is responsible for returning a valid R object based on the document-type.
-The Cadenza parser takes a multipart form with a specific structure and returns a dataframe.
+A parser is responsible for returning a valid R object based on the
+document-type.  The Cadenza parser takes a multipart form with a
+specific structure and returns a dataframe.
 }
 \details{
 See \code{\link[plumber:parsers]{plumber::parser_form()}} for details and
@@ -33,6 +36,7 @@ See \code{\link[plumber:parsers]{plumber::parser_form()}} for details and
 \itemize{
 \item \code{parser_cadenza()}: Parse multipart-form request from Cadenza
 
-\item \code{parser_delim()}: Parse any delimited files. See \code{\link[vroom:vroom]{vroom::vroom()}} for details.
+\item \code{parser_delim()}: Parse any delimited files. See \code{\link[vroom:vroom]{vroom::vroom()}}
+for details.
 
 }}

@@ -216,7 +216,7 @@ glue_multipart <- function(body, type, boundary) {
 #' @describeIn serializers Serialize as multipart-form
 #' @export
 #'
-#' @example
+#' @examples
 #' pr() |>
 #'   pr_get(
 #'     "/form",
