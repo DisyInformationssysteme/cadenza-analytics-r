@@ -20,11 +20,18 @@ boundary <- stringi::stri_rand_strings(n = 1L, length = 30L)
 #' @param res The Plumber response construct
 #' @param plotfile The plot file created in the Plumber R file
 #'
-#' @return res The Plumber response construct adjusted
+#' @return The Plumber response construct with the plot data added
 #' @export
 #'
 #' @examples
-#' res <- as_cadenza_visualization(res, plotfile)
+#' png(file = "plot.png")
+#' plot(list(1), list(1))
+#' dev.off()
+#' res <- list("injected from plumber")
+#' res <- as_cadenza_visualization(res, "plot.png")
+#' res$status
+#' res$headers
+#' length(res$body)
 
 as_cadenza_visualization <- function(res, plotfile) {
 
@@ -125,7 +132,6 @@ as_cadenza_visualization <- function(res, plotfile) {
 #' @describeIn serializer Serialize the multipart-form required by
 #'     Cadenza for visualizations
 #'
-#' @importFrom
 #' @export
 
 serializer_cadenza_visualization <- function(...) { # nolint symbol length

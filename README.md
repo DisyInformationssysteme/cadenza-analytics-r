@@ -171,7 +171,7 @@ Implement a discovery endpoint following `inst/plumber/discovery.R`.
 #* @serializer cadenza_discovery_response
 function () {
   discovery(
-    list(
+    extensions = list(
       extension_reference(
         extensionPrintName = "The Name",
         extensionType = "calculation",

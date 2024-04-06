@@ -12,18 +12,24 @@ as_cadenza_enrichment_calculation(
 )
 }
 \arguments{
-\item{data}{Either a dataframe or a list of either with data to send back to Cadenza.}
+\item{data}{Either a dataframe or a list of either with data to
+send back to Cadenza.}
 
-\item{parameters}{Parameters to return to Cadenza. Defaults to an empty named list.}
+\item{parameters}{Parameters to return to Cadenza. Defaults to an
+empty named list.}
 
-\item{container_type}{String: The HTML content type for serializing data. Defaults to \code{"text/csv"}.
-If data is a list, supply a vector with the content types for each element.}
+\item{container_type}{String: The HTML content type for serializing
+data. Defaults to \code{"text/csv"}.  If data is a list, supply a
+vector with the content types for each element.}
 
-\item{...}{For future expansion: Further arguments passed on to generating the metadata for the Cadenza response-}
+\item{...}{For future expansion: Further arguments passed on to
+generating the metadata for the Cadenza response-}
 
-\item{role}{A list of the same length as data with vectors of length \code{ncol(data[[el]])}.
-Values \code{"dimension"} or \code{"measure"}, indicating the role for Cadenza.
-Default values are \code{"measure"} for each column except IDs, Geometries or strings.}
+\item{role}{A list of the same length as data with vectors of
+length \code{ncol(data[[el]])}.  Values \code{"dimension"} or
+\code{"measure"}, indicating the role for Cadenza.  Default values
+are \code{"measure"} for each column except IDs, Geometries or
+strings.}
 }
 \value{
 List of class \code{cadenza_response} with elements \code{metadata}
@@ -36,9 +42,12 @@ Prepare data for Cadenza
 
 data <- data.frame(a = rnorm(10L), b = runif(10L), c = letters[1L:10L])
 
-# specify the container content type; this part will be serialized as JSON in the response.
+# specify the container content type; this part will be serialized
+# as JSON in the response.
 as_cadenza_enrichment_calculation(data, container_type = "application/json")
 
 # List of data elements to return to Cadenza
 data_list <- list(data, list(param = "a", vec = 1:13))
+as_cadenza_enrichment_calculation(data_list,
+  container_type = c("text/csv", "application/json"))
 }
