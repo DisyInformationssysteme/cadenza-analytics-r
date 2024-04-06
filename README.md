@@ -72,6 +72,15 @@ options("plumber.port" = 9292)
 root$run()
 ````
 
+## Update the API documentation
+
+In an R-session run roxygen2 and pkgdown:
+
+````r
+roxygen2::roxygenize()
+pkgdown::build_site()
+````
+
 # Defining an Analytics Extension
 
 ## Defining an API
