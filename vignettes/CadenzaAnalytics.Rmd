@@ -22,6 +22,106 @@ As of disy Cadenza Autumn 2023 (9.3), the following types and capabilities of an
 - **Data generation**
   The Analytics Extension type `calculation` provides a result data set that is created as a new Cadenza object type.
 
+## Defining an API
+
+For disy Cadenza to make use of the APIs, both a `@get` and `@post` request must be defined.  This can be done using the plumber package similar to the following:
+
+```r
+#* 'GET description'
+#* 'GET parameter description'
+#* @get '/endpoint-name'
+#* @serializer 'GET serializer'
+function(){
+
+}
+
+#* 'POST description'
+#* @preempt 'POST Filter'
+#* @parser 'POST parser'
+#* @param 'Post parameter'
+#* @post '/endpoint-name'
+#* @serializer 'POST serializer'
+function(){
+
+}
+```
+
+When developing an analytics extension, please refer to the Cadenza Advanced Analytics Service Programming Interface (SPI).
+
+A working minimal example would be the following:
+
+```r
+library(dplyr)
+
+#* GETCapabilities-Request of the row wise sum extension
+#* This extension's parameters are:
+#* @get /rowSum
+#* @serializer cadenza_capabilities_response
+function() {
+  extension(
+    printName = "Calculate row wise sum",
+    extensionType = "enrichment",
+    attributeGroups = list(
+      attribute_group(
+        name = "toSum",
+        printName = "Columns to use",
+        dataTypes = c("int64", "float64"),
+        minAttributes = 1L
+      )
+    )
+  )
+}
+
+## POST --------------
+#* Compute row wise sums
+#* @post /rowSum
+#* @parser cadenza
+#* @serializer cadenza_enrichment_calculation
+function(data, metadata, column_info) {
+
+  # Select the colums to sum over
+  to_sum <- column_info |>
+    filter(attributeGroupName == "toSum") |>
+    pull(name)
+  # Select the ID column
+  id_column <- column_info |>
+    filter(attributeGroupName != "toSum") |>
+    pull(name)
+
+  # Sum across each row
+  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "ID"
+  result <- data |>
+    rowwise("ID") |>
+    summarise(result = sum(c_across(c(!!!to_sum)))) |>
+    ungroup()
+
+  as_cadenza_enrichment_calculation(result)
+}
+```
+
+## Adding extension discovery
+
+Implement a discovery endpoint following `inst/plumber/discovery.R`.
+
+```r
+# GET ----------------
+#* DiscoveryRequest for the defined analytics extensions
+#* @get /
+#* @serializer cadenza_discovery_response
+function () {
+  discovery(
+    extensions = list(
+      extension_reference(
+        extensionPrintName = "The Name",
+        extensionType = "calculation",
+        relativePath = "/path-of-extension"
+      )
+    )
+  )
+}
+```
+
+
 ## Communication
 
 An Analytics Extension defines one endpoint that, depending on the HTTP method of the request, is used to supply the Extension's configuration to disy Cadenza, or exchange data and results with Cadenza respectively.
@@ -37,15 +137,13 @@ The `cadenzaanalytics` module provides the functionality to abstract the require
 
 As long as this package is in beta, it is only available on GitHub, and an installation via source is necessary.
 
-Furthermore, a corresponding version will be packaged as source code with each release of disy Cadenza.
-
 ## Requirements and Dependencies
 
 The requirements of the extension are documented in the [README](https://github.com/DisyInformationssysteme/cadenza-analytics-r/blob/main/README.md). 
 
 The first version of disy Cadenza that supports Analytics Extensions is disy Cadenza Autumn 2023 (9.3). For each disy Cadenza version, the correct corresponding library version needs to be used:
 
-|disy Cadenza version |  cadenzaanalytics version |
+|disy Cadenza version |  CadenzaAnalytics version |
 |---------------------|---------------------------|
 | 9.3 (Autumn 2023)   |             < 0.2.0 (beta)|
 
