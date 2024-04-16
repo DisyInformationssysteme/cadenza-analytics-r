@@ -1,11 +1,11 @@
 # Cadenza Analytics R
 
-Cadenza Analytics R is a convenience-library which enables
-[disy Cadenza](https://www.disy.net/de/produkte/cadenza/datenanalyse-software/)
-to use R-scripts as analytics extensions.
+**CadenzaAnalytics** is the official package for fast and easy creation of [disy Cadenza](https://www.disy.net/en/products/disy-cadenza/) analytics extensions with R. It enables extending disy Cadenza with advanced analytics using R.
 
-This package is in Beta-Status: it can be used for testing, but there
+This package is in **beta status**: it can be used for testing, but there
 may be breaking changes before a full release.
+
+Find the docs at https://disyinformationssysteme.github.io/cadenza-analytics-r
 
 ## Dependencies
 
@@ -33,6 +33,17 @@ Build time dependencies:
 
 RStudio provides the most common development environment for R:
 https://posit.co/download/rstudio-desktop/
+
+## Example
+
+Example extensions can be found in  [inst/plumber](inst/plumber).
+
+To test the example extension, follow the installation and setup instructions.
+
+A development server will be started on localhost `http://127.0.0.1:9292`. The analytics extension can now be registered and used in disy Cadenza.
+
+It is not recommended to use the development server in a production environment.
+
 
 ## Installation and setup in plain R
 
@@ -182,10 +193,15 @@ function () {
 }
 ```
 
+## Communication with Cadenza
+
+Details about the communication with Cadenza are described in `vignette("cadenza-analytics-r")`.
+
 # Using the Analytics extension
 
 Add the URL `https://host:port/the-route/endpoint-name` as analytics extension.
 
-- `/the-route` is the route chosen in mounting the script file on root.
-- `/endpoint-name` is the endpoint defined in GetCapabilities.
+- `host:port` are by default 127.0.0.1:9292
+- `/the-route` is the route chosen in mounting the script file on root
+- `/endpoint-name` is the endpoint defined in GetCapabilities
 
