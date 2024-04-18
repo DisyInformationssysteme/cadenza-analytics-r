@@ -45,44 +45,6 @@ A development server will be started on localhost `http://127.0.0.1:9292`. The a
 It is not recommended to use the development server in a production environment.
 
 
-## Installation and setup in plain R
-
-After cloning the git repository, install the dependencies and the
-package by sourcing `install_CadenzaAnalytics.R` **in an R session**
-inside the cloned directory (`cadenza-analytics-r`):
-
-```r
-source("install_CadenzaAnalytics.R")
-```
-
-The file `install_CadenzaAnalytics.R` contains some
-user-settings. Adjust those to your needs.
-
-## Installation and setup in R-Studio
-
-After cloning the git repository, use
-
-```r
-library(CadenzaAnalytics)
-```
-
-to import the package into R. Note, that `CadenzaAnalytics.Rproj` needs to
-be in the same directory as your R-script for this to work.
-
-Cadenza Analytics R uses swagger and plumber in tandem to enable users
-to host their own analytics extensions. To start, either use
-`install_CadenzaAnalytics.R` or host your own endpoints:
-
-````r
-root <- Plumber$new()
-a <- Plumber$new('path_to_script_1')
-b <- Plumber$new('path_to_script_2')
-pr_mount(root, '/the-route', a)
-pr_mount(root, '/the-route', b)
-options("plumber.port" = 9292)
-root$run()
-````
-
 ## Update the API documentation
 
 In an R-session run roxygen2 and pkgdown:
