@@ -8,3 +8,5 @@ home:
     for fast and easy creation of disy Cadenza
     analytics extensions with R.
     It enables extending disy Cadenza
+  sidebar:
+    structure: [links, license]
