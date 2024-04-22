@@ -1,0 +1,16 @@
+url: https://disyinformationssysteme.github.io/cadenza-analytics-r
+template:
+  bootstrap: 5
+home:
+  title: Cadenza Analytics R
+  description: >
+    CadenzaAnalytics is the official package
+    for fast and easy creation of disy Cadenza
+    analytics extensions with R.
+    It enables extending disy Cadenza
+  sidebar:
+    structure: [custom, links]
+    components:
+      custom:
+        title:
+        text: <a href="https://www.disy.net/en/products/disy-cadenza"><img src="https://www.disy.net/typo3conf/ext/contentelements/Resources/Public/dist/img/logo-disy.svg" /></a>

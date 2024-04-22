@@ -4,17 +4,26 @@
 \alias{as_cadenza_visualization}
 \title{Prepare visualization results for Cadenza}
 \usage{
-as_cadenza_visualization(plotfile)
+as_cadenza_visualization(res, plotfile)
 }
 \arguments{
+\item{res}{The Plumber response construct}
+
 \item{plotfile}{The plot file created in the Plumber R file}
 }
 \value{
-res The Plumber reponse construct
+The Plumber response construct with the plot data added
 }
 \description{
 Prepare visualization results for Cadenza
 }
 \examples{
-res <- as_cadenza_visualization(plotfile)
+png(file = "plot.png")
+plot(list(1), list(1))
+dev.off()
+res <- list("injected from plumber")
+res <- as_cadenza_visualization(res, "plot.png")
+res$status
+res$headers
+length(res$body)
 }

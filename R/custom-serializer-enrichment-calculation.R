@@ -208,7 +208,7 @@ glue_multipart <- function(body, type, boundary) {
 #'     strings and has to have the attribute `type` with the HTML
 #'     content type of each part.
 #' @param boundary The boundary string with which the parts are to be
-#'     separated.  If `NULL` a random string of 30 characters will be
+#'     separated.  If `NULL`, a random string of 30 characters will be
 #'     generated and used.
 #' @param ... Additional arguments to be passed to the serialize
 #'     function.
@@ -216,7 +216,8 @@ glue_multipart <- function(body, type, boundary) {
 #' @describeIn serializers Serialize as multipart-form
 #' @export
 #'
-#' @example
+#' @examples
+#' \dontrun{
 #' pr() |>
 #'   pr_get(
 #'     "/form",
@@ -224,6 +225,7 @@ glue_multipart <- function(body, type, boundary) {
 #'                               list(param = "b", value = 12)),
 #'     serializer = serializer_multi(
 #'       serialiize_fn = function(val) lapply(val, )))
+#' }
 serializer_multi <- function(serialize_fn, boundary = NULL, ...) {
   if (is.null(boundary)) {
     boundary <- stringi::stri_rand_strings(n = 1L, length = 30L)
