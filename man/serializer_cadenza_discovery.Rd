@@ -7,9 +7,7 @@
 serializer_cadenza_discovery(...)
 }
 \arguments{
-\item{discovery}{A list with an extension of a extension_references.
-Each requires a printName, extensionType, and attributeGroups.
-It can optionally take parameters.}
+\item{...}{a \code{\link[=discovery]{discovery()}} structure.}
 }
 \value{
 a discovery response.
@@ -18,13 +16,17 @@ a discovery response.
 Build the Discovery GET-response.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 function() {
-  list(
-    extension_reference(
-      extensionPrintName = "The Name",
-      extensionType = "calculation",
-      relativePath = "/path-of-extension"
+  discovery(
+    extensions = list(
+      extension_reference(
+        extensionPrintName = "The Name",
+        extensionType = "calculation",
+        relativePath = "/path-of-extension"
+      )
     )
   )
 }
+\dontshow{\}) # examplesIf}
 }

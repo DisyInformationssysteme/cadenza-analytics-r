@@ -2,10 +2,15 @@
 % Please edit documentation in R/custom-serializer-discovery.R
 \name{extension_reference}
 \alias{extension_reference}
-\title{The extension description}
+\title{The description of one extension}
 \usage{
 extension_reference(...)
 }
+\arguments{
+\item{...}{requires a printName, extensionType, and attributeGroups.
+It can optionally take additional parameters.
+For examples, see \code{\link[=serializer_cadenza_discovery]{serializer_cadenza_discovery()}}}
+}
 \description{
-The extension description
+The description of one extension
 }

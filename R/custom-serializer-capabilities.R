@@ -20,7 +20,7 @@
 #' @return a GetCapabilities response.
 #' @export
 #'
-#' @examples
+#' @examplesIf interactive()
 #' function() {
 #'   extension(
 #'     printName = "Data Generation",
@@ -52,18 +52,24 @@ serializer_cadenza_capabilities <- function(...) { # nolint symbol length
 }
 
 #' The extension description
+#'
+#' See the examples in [serializer_cadenza_capabilities()].
 #' @export
 extension <- function(...) {
   list(...)
 }
 
-#' A group of attributes used in the extension
+#' A group of attributes used in the extension.
+#'
+#' See the examples in [serializer_cadenza_capabilities()].
 #' @export
 attribute_group <- function(...) {
   list(...)
 }
 
-#' A parameter that can or must be passed to the extension
+#' A parameter that can or must be passed to the extension.
+#'
+#' See the examples in [serializer_cadenza_capabilities()].
 #' @export
 parameter <- function(...) {
   list(...)

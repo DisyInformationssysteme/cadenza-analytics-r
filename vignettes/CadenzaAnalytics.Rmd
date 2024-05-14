@@ -1,0 +1,194 @@
+**CadenzaAnalytics** is the official package for fast and easy creation of [disy Cadenza](https://www.disy.net/en/products/disy-cadenza/) analytics extensions with R. It enables extending disy Cadenza with advanced analytics using R.
+
+This package is in **beta status**: it can be used for testing, but there
+may be breaking changes before a full release.
+
+<pre>    
+ <b>!! This module is currently in beta status !!</b>
+
+    It can be used for testing, but there may be breaking changes before a full release.
+    This documentation is still under developement as well.
+
+</pre>
+
+
+# disy Cadenza Analytics Extensions
+
+An Analytics Extension extends the functional spectrum of [disy Cadenza](https://www.disy.net/en/products/disy-cadenza/) with an analysis function or a visualisation type. An Analytics Extension is a web service that exchanges structured data with disy Cadenza via the Cadenza API. A user can integrate an analysis extension into disy Cadenza via the Management Center and manage it there (if they have the appropriate rights).
+
+As of disy Cadenza Autumn 2023 (9.3), the following types and capabilities of analysis extensions are officially supported:
+
+- **Visualization**
+  The Analytics Extension type `visualization` provides a new visualization type for displaying a bitmap image (PNG).
+
+- **Data enrichment**
+  The Analytcs Extension type `enrichment` returns data that enriches an existing Cadenza object type by adding additional attributes, which virtually add additional columns to the original data set.
+
+- **Data generation**
+  The Analytics Extension type `calculation` provides a result data set that is created as a new Cadenza object type.
+
+
+## Communication
+
+An Analytics Extension defines one endpoint that, depending on the HTTP method of the request, is used to supply the Extension's configuration to disy Cadenza, or exchange data and results with Cadenza respectively.
+
+<img src="communication.png" alt="(Image: Communication between disy Cadenza and Analytics Extension)" width="800">
+
+When receiving an `HTTP(S) GET` request, the endpoint returns a JSON representation of the extention's configuration. This step is executed once when registering the Analytics Extension from the disy Cadenza Management Center GUI and does not need to be repeated unless the extension's configuration changes.
+
+By sending an `HTTP(S) POST` request to the same endpoint and including the data, metadata and parameters as specified in the extension's configuration as payload, the extension is executed. This step is executed each time that the Analytics Extension is invoked from the disy Cadenza GUI and Cadenza takes care of properly formatting the payload.
+
+The `cadenzaanalytics` module provides the functionality to abstract the required communication and easily configure the Analytics Extension's responses to the above requests. 
+
+
+## Defining an API
+
+For disy Cadenza to make use of the APIs, both a `@get` and `@post` request must be defined.  This can be done using the plumber package similar to the following:
+
+```r
+#* 'GET description'
+#* 'GET parameter description'
+#* @get '/endpoint-name'
+#* @serializer 'GET serializer'
+function(){
+
+}
+
+#* 'POST description'
+#* @preempt 'POST Filter'
+#* @parser 'POST parser'
+#* @param 'Post parameter'
+#* @post '/endpoint-name'
+#* @serializer 'POST serializer'
+function(){
+
+}
+```
+
+A working minimal example would be the following:
+
+```r
+library(dplyr)
+
+#* GETCapabilities-Request of the row wise sum extension
+#* This extension's parameters are:
+#* @get /rowSum
+#* @serializer cadenza_capabilities_response
+function() {
+  extension(
+    printName = "Calculate row wise sum",
+    extensionType = "enrichment",
+    attributeGroups = list(
+      attribute_group(
+        name = "toSum",
+        printName = "Columns to use",
+        dataTypes = c("int64", "float64"),
+        minAttributes = 1L
+      )
+    )
+  )
+}
+
+## POST --------------
+#* Compute row wise sums
+#* @post /rowSum
+#* @parser cadenza
+#* @serializer cadenza_enrichment_calculation
+function(data, metadata, column_info) {
+
+  # Select the colums to sum over
+  to_sum <- column_info |>
+    filter(attributeGroupName == "toSum") |>
+    pull(name)
+  # Select the ID column
+  id_column <- column_info |>
+    filter(attributeGroupName != "toSum") |>
+    pull(name)
+
+  # Sum across each row
+  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "ID"
+  result <- data |>
+    rowwise("ID") |>
+    summarise(result = sum(c_across(c(!!!to_sum)))) |>
+    ungroup()
+
+  as_cadenza_enrichment_calculation(result)
+}
+```
+
+## Adding extension discovery
+
+Implement a discovery endpoint following `inst/plumber/discovery.R`.
+
+```r
+# GET ----------------
+#* DiscoveryRequest for the defined analytics extensions
+#* @get /
+#* @serializer cadenza_discovery_response
+function () {
+  discovery(
+    extensions = list(
+      extension_reference(
+        extensionPrintName = "The Name",
+        extensionType = "calculation",
+        relativePath = "/path-of-extension"
+      )
+    )
+  )
+}
+```
+
+# Installation
+
+As long as this package is in beta, it is only available on GitHub, and an installation via source is necessary.
+
+## Requirements and Dependencies
+
+The requirements of the extension are documented in the [README](https://github.com/DisyInformationssysteme/cadenza-analytics-r/blob/main/README.md). 
+
+The first version of disy Cadenza that supports Analytics Extensions is disy Cadenza Autumn 2023 (9.3). For each disy Cadenza version, the correct corresponding library version needs to be used:
+
+|disy Cadenza version |  CadenzaAnalytics version |
+|---------------------|---------------------------|
+| 9.3 (Autumn 2023)   |             < 0.2.0 (beta)|
+
+## Installation and setup in plain R
+
+After cloning the git repository, install the dependencies and the
+package by sourcing `install_CadenzaAnalytics.R` **in an R session**
+inside the cloned directory (`cadenza-analytics-r`):
+
+```r
+source("install_CadenzaAnalytics.R")
+```
+
+The file `install_CadenzaAnalytics.R` contains some
+user-settings. Adjust those to your needs.
+
+## Installation and setup in R-Studio
+
+After cloning the git repository, use
+
+```r
+library(CadenzaAnalytics)
+```
+
+to import the package into R. Note, that `CadenzaAnalytics.Rproj` needs to
+be in the same directory as your R-script for this to work.
+
+Cadenza Analytics R uses swagger and plumber in tandem to enable users
+to host their own analytics extensions. To start, either use
+`install_CadenzaAnalytics.R` or host your own endpoints:
+
+````r
+root <- Plumber$new()
+a <- Plumber$new('path_to_script_1')
+b <- Plumber$new('path_to_script_2')
+pr_mount(root, '/the-route', a)
+pr_mount(root, '/the-route', b)
+options("plumber.port" = 9292)
+root$run()
+````
+
+
+

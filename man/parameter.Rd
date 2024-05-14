@@ -2,10 +2,10 @@
 % Please edit documentation in R/custom-serializer-capabilities.R
 \name{parameter}
 \alias{parameter}
-\title{A parameter that can or must be passed to the extension}
+\title{A parameter that can or must be passed to the extension.}
 \usage{
 parameter(...)
 }
 \description{
-A parameter that can or must be passed to the extension
+See the examples in \code{\link[=serializer_cadenza_capabilities]{serializer_cadenza_capabilities()}}.
 }

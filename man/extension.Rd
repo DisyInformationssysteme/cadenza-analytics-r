@@ -7,5 +7,5 @@
 extension(...)
 }
 \description{
-The extension description
+See the examples in \code{\link[=serializer_cadenza_capabilities]{serializer_cadenza_capabilities()}}.
 }

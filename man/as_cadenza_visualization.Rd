@@ -18,5 +18,12 @@ res The Plumber response construct adjusted
 Prepare visualization results for Cadenza
 }
 \examples{
-res <- as_cadenza_visualization(res, plotfile)
+png(file = "plot.png")
+plot(list(1), list(1))
+dev.off()
+res <- list("injected from plumber")
+res <- as_cadenza_visualization(res, "plot.png")
+res$status
+res$headers
+length(res$body)
 }

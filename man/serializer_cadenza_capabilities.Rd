@@ -18,6 +18,7 @@ a GetCapabilities response.
 Build the Capabilities GET-response.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 function() {
   extension(
     printName = "Data Generation",
@@ -42,4 +43,5 @@ function() {
     )
   )
 }
+\dontshow{\}) # examplesIf}
 }

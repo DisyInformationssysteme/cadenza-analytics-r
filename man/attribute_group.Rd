@@ -2,10 +2,9 @@
 % Please edit documentation in R/custom-serializer-capabilities.R
 \name{attribute_group}
 \alias{attribute_group}
-\title{A group of attributes used in the extension}
 \usage{
 attribute_group(...)
 }
 \description{
-A group of attributes used in the extension
+See the examples in \code{\link[=serializer_cadenza_capabilities]{serializer_cadenza_capabilities()}}.
 }

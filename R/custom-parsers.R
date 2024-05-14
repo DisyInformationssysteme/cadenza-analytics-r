@@ -25,16 +25,16 @@ detect_boundary <- function(content_type) {
 
 
 
-#' Custom parsers
+#' Cadenza parsers
 #'
 #' A parser is responsible for returning a valid R object based on the
 #' document-type.  The Cadenza parser takes a multipart form with a
 #' specific structure and returns a dataframe.
 #'
-#' See [plumber::parser_form()] for details and
-#' [plumber::registered_parsers()] for a list of registered parsers names.
+#' See [plumber::registered_parsers()] for a list of registered parsers names.
 #'
-#' @describeIn parsers Parse multipart-form request from Cadenza
+#' @describeIn parsers Parse multipart-form request from Cadenza. Also see [plumber::parser_form()].
+#'
 #' @return
 #'  A list with the following elements:
 #'  - data: the data sent by Cadenza; Can be a dataframe or a list
@@ -85,8 +85,9 @@ parser_cadenza <- function() {
   }
 }
 
-#' @describeIn parsers Parse any delimited files. See [vroom::vroom()]
-#'     for details.
+#' @describeIn parsers Parse any delimiter separated value data.
+#'     Also see [vroom::vroom()].
+#'
 #' @param ... Additional arguments passed on to [vroom::vroom()].
 #' @export
 parser_delim <- function(...) {

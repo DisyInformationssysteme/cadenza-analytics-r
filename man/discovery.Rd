@@ -2,10 +2,13 @@
 % Please edit documentation in R/custom-serializer-discovery.R
 \name{discovery}
 \alias{discovery}
-\title{The extension description}
+\title{The description for available extensions}
 \usage{
 discovery(...)
 }
+\arguments{
+\item{extensions}{a list of \code{\link[=extension_reference]{extension_reference()}}'s. For examples, see \code{\link[=serializer_cadenza_discovery]{serializer_cadenza_discovery()}}}
+}
 \description{
-The extension description
+The description for available extensions
 }

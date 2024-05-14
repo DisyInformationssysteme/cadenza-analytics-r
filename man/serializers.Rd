@@ -16,7 +16,7 @@ strings and has to have the attribute \code{type} with the HTML
 content type of each part.}
 
 \item{boundary}{The boundary string with which the parts are to be
-separated.  If \code{NULL} a random string of 30 characters will be
+separated.  If \code{NULL}, a random string of 30 characters will be
 generated and used.}
 
 \item{...}{Additional arguments to be passed to the serialize
@@ -34,6 +34,7 @@ enrichments and calculations
 
 }}
 \examples{
+\dontrun{
 pr() |>
   pr_get(
     "/form",
@@ -41,4 +42,5 @@ pr() |>
                               list(param = "b", value = 12)),
     serializer = serializer_multi(
       serialiize_fn = function(val) lapply(val, )))
+}
 }

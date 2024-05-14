@@ -14,19 +14,20 @@
 
 #' Build the Discovery GET-response.
 #'
-#' @param discovery A list with an extension of a extension_references.
-#' Each requires a printName, extensionType, and attributeGroups.
-#' It can optionally take parameters.
+#' @param ... a [discovery()] structure.
+#'
 #' @return a discovery response.
 #' @export
 #'
-#' @examples
+#' @examplesIf interactive()
 #' function() {
-#'   list(
-#'     extension_reference(
-#'       extensionPrintName = "The Name",
-#'       extensionType = "calculation",
-#'       relativePath = "/path-of-extension"
+#'   discovery(
+#'     extensions = list(
+#'       extension_reference(
+#'         extensionPrintName = "The Name",
+#'         extensionType = "calculation",
+#'         relativePath = "/path-of-extension"
+#'       )
 #'     )
 #'   )
 #' }
@@ -36,14 +37,22 @@ serializer_cadenza_discovery <- function(...) { # nolint symbol length
   serializer_unboxed_json(...)
 }
 
-#' The extension description
+#' The description of one extension
+#'
+#' @param ... requires a printName, extensionType, and attributeGroups.
+#' It can optionally take additional parameters.
+#' For examples, see [serializer_cadenza_discovery()]
+#'
 #' @export
 extension_reference <- function(...) {
   list(...)
 }
 
 
-#' The extension description
+#' The description for available extensions
+#'
+#' @param extensions a list of [extension_reference()]'s. For examples, see [serializer_cadenza_discovery()]
+#'
 #' @export
 discovery <- function(...) {
   list(...)
