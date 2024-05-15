@@ -35,7 +35,6 @@ create_analytics_extension <- function() {
 }
 
 #' Generate Basic Dockerfile
-#' @export
 create_extension_dockerfile <- function() {
   dockerfile_path <- fs::path_package("inst", "docker", package="CadenzaAnalytics")
   files <- list.files(dockerfile_path, recursive = TRUE, full.names = TRUE)

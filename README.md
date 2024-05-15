@@ -67,12 +67,6 @@ roxygen2::roxygenize()
 pkgdown::build_site()
 ````
 
-To generate a Dockerfile that can help you deploy your extension using Docker, run
-
-```r
-CadenzaAnalytics::create_dockerfile()
-```
-
 
 
 # Defining an Analytics Extension
