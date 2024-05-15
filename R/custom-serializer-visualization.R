@@ -129,7 +129,7 @@ as_cadenza_visualization <- function(res, plotfile) {
 
 
 
-#' @describeIn serializer Serialize the multipart-form required by
+#' @describeIn serializers Serialize the multipart-form required by
 #'     Cadenza for visualizations
 #'
 #' @importFrom plumber serializer_octet
