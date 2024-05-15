@@ -15,7 +15,7 @@
 #' Generate Demo Extensions
 #' @export
 create_analytics_extension <- function() {
-  demo_extension_path <- fs::path_package("inst", "plumber", package="CadenzaAnalytics")
+  demo_extension_path <- fs::path_package("plumber", package="CadenzaAnalytics")
   files <- list.files(demo_extension_path, recursive = TRUE, full.names = TRUE)
   working_path = getwd()
   created_files <- sapply(files, function(x) {
