@@ -12,7 +12,7 @@ as_cadenza_visualization(res, plotfile)
 \item{plotfile}{The plot file created in the Plumber R file}
 }
 \value{
-res The Plumber response construct adjusted
+The Plumber response construct with the plot data added
 }
 \description{
 Prepare visualization results for Cadenza

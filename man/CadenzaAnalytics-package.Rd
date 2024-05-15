@@ -3,12 +3,28 @@
 %   R/plumbercadenza-package.R
 \docType{package}
 \name{CadenzaAnalytics-package}
+\alias{CadenzaAnalytics}
 \alias{CadenzaAnalytics-package}
 \title{CadenzaAnalytics: Create An API For The Cadenza Analytics Extension With Plumber}
 \description{
 Cadenza Analytics Extensions enable complex data analytics to be integrated via external services. This package provides the tooling to create such Analytics Extensions easily from R.
 
 Cadenza Analytics Extensions enable complex data analytics to be integrated via external services. This package provides the tooling to create such Analytics Extensions easily from R.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://disyinformationssysteme.github.io/cadenza-analytics-r/}
+  \item \url{https://github.com/DisyInformationssysteme/cadenza-analytics-r}
+}
+
+
+Useful links:
+\itemize{
+  \item \url{https://disyinformationssysteme.github.io/cadenza-analytics-r/}
+  \item \url{https://github.com/DisyInformationssysteme/cadenza-analytics-r}
+}
+
 }
 \author{
 \strong{Maintainer}: Matthias Theobald \email{matthias.theobald@disy.net}
@@ -17,7 +33,7 @@ Authors:
 \itemize{
   \item Lossow Stefan \email{stefan.lossow@disy.net}
   \item Herrmann Marius \email{marius.herrmann@disy.net}
-  \item Babenhauserheide Arne \email{arne.babenhauserheide@disy.net}
+  \item Babenhauserheide Arne \email{arne.babenhauserheide@disy.net} (\href{https://orcid.org/0000-0003-1381-8277}{ORCID})
 }
 
 Other contributors:

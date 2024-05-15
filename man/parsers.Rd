@@ -38,5 +38,4 @@ See \code{\link[plumber:register_parser]{plumber::registered_parsers()}} for a l
 \item \code{parser_delim()}: Parse any delimiter separated value data.
 Also see \code{\link[vroom:vroom]{vroom::vroom()}}.
 
-
 }}
