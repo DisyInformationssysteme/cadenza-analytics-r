@@ -22,7 +22,7 @@
 function() {
   extension(
     printName = "Hello Calculation",
-    extensionType = "calculation",
+    extensionType = "data",
     attributeGroups = list(
       attribute_group(
         name = "hello",

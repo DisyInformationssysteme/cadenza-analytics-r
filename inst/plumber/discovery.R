@@ -21,8 +21,8 @@ function () {
     extensions = list(
       extension_reference(
         extensionPrintName = "Hello Calculation",
-        extensionType = "calculation",
-        relativePath = "/calculation/hello"
+        extensionType = "data",
+        relativePath = "/data/hello"
       ),
       extension_reference(
         extensionPrintName = "Row Sums",

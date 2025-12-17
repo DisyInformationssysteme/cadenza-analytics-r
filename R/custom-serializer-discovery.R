@@ -25,7 +25,7 @@
 #'     extensions = list(
 #'       extension_reference(
 #'         extensionPrintName = "The Name",
-#'         extensionType = "calculation",
+#'         extensionType = "data",
 #'         relativePath = "/path-of-extension"
 #'       )
 #'     )
