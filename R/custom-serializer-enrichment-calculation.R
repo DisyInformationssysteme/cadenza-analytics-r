@@ -278,6 +278,7 @@ serializer_cadenza_enrichment_calculation <- function(...) { # nolint
             across(everything(), as.character)
           ) |>
           vroom::vroom_format(delim = ";", quote = "all", escape = "double") |>
+          stringi::stri_replace_all(replacement = "", regex = "NA") |>
           stringi::stri_replace_all(replacement = "\r\n", regex = "\n")
       )
     }
