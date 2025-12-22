@@ -13,8 +13,8 @@ for (i in 1:length(l)){
 
 # Mount the extension routers onto the root router
 for (i in 1:length(p)){
-  # mount extensions by path.
-  # example: mount inst/plumber/data/plumber.R on /data
+  # mount all extensions by path.
+  # example: inst/plumber/data/plumber.R is mounted on /data
   # plumber.R defines the sub-path.
   # In this case it is  /hello, so the endpoint is /data/hello
   pr_mount(root, paste0("/",gsub("/plumber.R","", gsub("inst/plumber/","", l[i]))), p[[i]])
