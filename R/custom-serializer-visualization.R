@@ -71,7 +71,6 @@ as_cadenza_visualization <- function(res, plotfile) {
   # meta data response
   meta_data_response <- '
   {
-    \"parameters\": {},
     \"dataContainers\": [
       {
         \"type\": \"image/png\",

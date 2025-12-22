@@ -80,7 +80,6 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   body <- c(
     list(
       metadata = list(
-        parameters = parameters,
         dataContainers = metadata_containers
       )
     ),
