@@ -45,7 +45,8 @@ You can install this package by running
 devtools::install_github("https://github.com/DisyInformationssysteme/cadenza-analytics-r")
 ```
 
-Once installed, include the package as you normally would:
+Once installed, include the package as you normally would.
+
 
 ## Create and deploy Analytics Extensions
 
