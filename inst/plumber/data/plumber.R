@@ -48,11 +48,13 @@ function() {
 ## POST --------------
 #* Execute the data generation.
 #* @parser cadenza
-#* @param data:df
+#* @param metadata
 #* @post /hello
 #* @serializer cadenza_enrichment_calculation
-function(cols) {
-
+function(metadata) {
+    cols <- ifelse(metadata$parameters[[1]]$name == "cols",
+                   metadata$parameters[[1]]$value,
+                   "1") # default: 1
     result <- ifelse(cols == "1",
                      list(data.frame(a = 83110)),
                      list(data.frame(a = 83110, b = 30270)))
