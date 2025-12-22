@@ -2,7 +2,7 @@ library(CadenzaAnalytics)
 library(plumber)
 
 # Generate a new router as root
-root <- Plumber$new("discovery.R")
+root <- Plumber$new("inst/plumber/discovery.R")
 
 # Locate all the files that are to be mounted onto the router
 l <- as.list(list.files(pattern="plumber.R", recursive=TRUE))
