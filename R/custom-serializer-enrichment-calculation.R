@@ -55,9 +55,9 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   # name containers
   if (is.null(names(data))) {
     if (length(data) == 1L) {
-      names(data) <- "data"
+      names(data) <- "response-data"
     } else {
-      names(data) <- paste0(rep_len("data", length(data)), "_", seq_along(data))
+      names(data) <- paste0(rep_len("response-data", length(data)), "_", seq_along(data))
     }
   }
 
