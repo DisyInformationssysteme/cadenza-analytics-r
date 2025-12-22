@@ -28,6 +28,11 @@ function () {
         extensionPrintName = "Row Sums",
         extensionType = "enrichment",
         relativePath = "/enrichment/rowSum"
+      ),
+      extension_reference(
+        extensionPrintName = "Static Image",
+        extensionType = "visual",
+        relativePath = "/visualization/staticImage"
       )
     )
   )
