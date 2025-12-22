@@ -58,6 +58,12 @@ CadenzaAnalytics::create_analytics_extension()
 
 `CadenzaAnalytics` uses [swagger](https://swagger.io) and [plumber](https://www.rplumber.io) in tandem to enable users to host their own analytics extensions.
 
+Start the analytics extension following the content of the file `inst/plumber/analytics_extension.R`. You can run it from an interactive R shell via
+
+```r
+source("inst/plumber/analytics_extension.R")
+```
+
 ## Update the API documentation
 
 In an R-session run roxygen2 and pkgdown:
