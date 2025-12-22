@@ -132,7 +132,9 @@ data_container_metadata <- function(data_container, container_name,
   # if no print names are supplied use the names of the dataframe or
   # list inside data
   if (missing(print_names) || is.null(print_names)) {
-    print_names <- names(data_container)
+    print_names <- ifelse(names(data_container) == "cadenza_id",
+                          "ID",
+                          names(data_container))
   } else {
     stopifnot(is.character(print_names))
   }
@@ -140,17 +142,17 @@ data_container_metadata <- function(data_container, container_name,
   data_type <- purrr::map_chr(data_container, cadenza_datatype)
   geom_type <- purrr::map_chr(data_container, geometry_type)
 
-  # When the Column name is "ID", take that as the ID column given by Cadenza.
+  # When the Column name is "cadenza_id", take that as the ID column given by Cadenza.
   random_group_name <- stringi::stri_rand_strings(n = 1L, length = 10L) # nolint
 
-  attribute_groupname <- ifelse(names(data_container) == "ID",
+  attribute_groupname <- ifelse(names(data_container) == "cadenza_id",
                                 "net.disy.cadenza.keyAttributeGroup",
-                                random_group_name)
+                                "data")
 
   # Define the role for each column If not specified, will default to
   # role "measure" except when an ID, geometry or string.
   if (missing(role) || is.null(role)) {
-    role <- ifelse(names(data_container) == "ID"
+    role <- ifelse(names(data_container) == "cadenza_id"
                    | data_type %in% c("geometry", "string"),
                    "dimension",
                    "measure")

@@ -36,9 +36,9 @@ function(data, metadata, column_info) {
     pull(name)
 
   # Sum across each row
-  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "ID"
+  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "cadenza_id"
   result <- data |>
-    rowwise("ID") |>
+    rowwise("cadenza_id") |>
     summarise(result = sum(c_across(c(!!!to_sum)))) |>
     ungroup()
 
