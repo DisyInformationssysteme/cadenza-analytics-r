@@ -139,7 +139,9 @@ data_container_metadata <- function(data_container, container_name,
     stopifnot(is.character(print_names))
   }
 
-  data_type <- purrr::map_chr(data_container, cadenza_datatype)
+  data_type <- ifelse(names(data_container) == "cadenza_id",
+                      "int64",
+                      purrr::map_chr(data_container, cadenza_datatype))
   geom_type <- purrr::map_chr(data_container, geometry_type)
 
   # When the Column name is "cadenza_id", take that as the ID column given by Cadenza.
