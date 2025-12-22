@@ -33,6 +33,16 @@ function () {
         extensionPrintName = "Static Image",
         extensionType = "visual",
         relativePath = "/visualization/staticImage"
+      ),
+      extension_reference(
+        extensionPrintName = "Describe data as text",
+        extensionType = "visual",
+        relativePath = "/text/describe"
+      ),
+      extension_reference(
+        extensionPrintName = "Show the Disy website",
+        extensionType = "visual",
+        relativePath = "/url/website"
       )
     )
   )
