@@ -24,7 +24,7 @@
 #' function() {
 #'   extension(
 #'     printName = "Data Generation",
-#'     extensionType = "calculation",
+#'     extensionType = "data",
 #'     attributeGroups = list(
 #'       attribute_group(
 #'         name = "datgen",
