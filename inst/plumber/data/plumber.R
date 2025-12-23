@@ -28,6 +28,7 @@ function() {
         name = "hello",
         printName = "Hello World",
         dataTypes = c("int64", "float64"),
+        required = TRUE,
         maxAttributes=1L
       )
     ),
