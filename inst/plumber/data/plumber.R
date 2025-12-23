@@ -71,5 +71,5 @@ function(metadata) {
                      list(data.frame(a = 83110)),
                      list(data.frame(a = 83110, b = 30270)))
 
-  as_cadenza_enrichment_calculation(result)
+  as_cadenza_enrichment_calculation(result, measureAggregation = "average", format = "#,##0.00")
 }

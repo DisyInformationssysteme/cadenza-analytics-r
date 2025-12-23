@@ -45,7 +45,7 @@
 #' as_cadenza_enrichment_calculation(data_list,
 #'   container_type = c("text/csv", "application/json"))
 
-as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_list, container_type = "text/csv", ...) { # nolint
+as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_list, container_type = "text/csv", measureAggregation = "average", format = "#,##0.00", ...) { # nolint
 
   # Wrap data in a list if it is not already a list
   if (!inherits(data, "list")) {
@@ -65,12 +65,20 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   if (length(container_type) == 1L) {
     container_type <- rep_len(container_type, length.out = length(data))
   }
+  if (length(measureAggregation) == 1L) {
+      measureAggregation <- rep_len(measureAggregation, length.out = length(data))
+  }
+  if (length(format) == 1L) {
+      format <- rep_len(format, length.out = length(data))
+  }
 
   metadata_containers <- purrr::pmap(
     .l = list(
       data = unname(data),
       container_name = names(data),
       container_type = container_type,
+      measureAggregation = measureAggregation,
+      format = format,
       ...
     ),
     .f = data_container_metadata
@@ -124,6 +132,7 @@ geometry_type <- function(x) {
 # data container metadata
 data_container_metadata <- function(data_container, container_name,
                                     container_type, print_names, role,
+                                    measureAggregation, format,
                                     ...) {
   stopifnot(is.character(container_name))
   stopifnot(is.character(container_type))
@@ -168,6 +177,8 @@ data_container_metadata <- function(data_container, container_name,
       printName = print_names,
       attributeGroupName = attribute_groupname,
       role = role,
+      measureAggregation = measureAggregation,
+      format = format,
       dataType = data_type,
       geometryType = geom_type,
       row.names = NULL

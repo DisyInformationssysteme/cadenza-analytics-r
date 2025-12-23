@@ -42,5 +42,9 @@ function(data, metadata, column_info) {
     summarise(result = sum(c_across(c(!!!to_sum)))) |>
     ungroup()
 
-  as_cadenza_enrichment_calculation(result)
+  # copy format and aggregation from the first column
+  format <- metadata$dataContainers[[1]]$columns[[2]]$format
+  measureAggregation <- metadata$dataContainers[[1]]$columns[[2]]$measureAggregation
+
+  as_cadenza_enrichment_calculation(result, format=format, measureAggregation=measureAggregation)
 }
