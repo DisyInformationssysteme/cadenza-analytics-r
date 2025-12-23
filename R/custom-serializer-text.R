@@ -15,41 +15,25 @@
 # static boundary of random characters per run.
 boundary <- stringi::stri_rand_strings(n = 1L, length = 30L)
 
-#' Prepare visualization results for Cadenza
+#' Prepare text results for Cadenza
 #'
 #' @param res The Plumber response construct
-#' @param plotfile The plot file created in the Plumber R file
+#' @param text The text created in the Plumber R file
 #'
-#' @return The Plumber response construct with the plot data added
+#' @return The Plumber response construct with the text added
 #' @export
 #'
 #' @examples
-#' png(file = "plot.png")
-#' plot(list(1), list(1))
-#' dev.off()
 #' res <- list("injected from plumber")
-#' res <- as_cadenza_visualization(res, "plot.png")
+#' res <- as_cadenza_text(res, "the text")
 #' res$status
 #' res$headers
 #' length(res$body)
 
-as_cadenza_visualization <- function(res, plotfile) {
-
-  # input check
-  if (!file.exists(plotfile)) {
-    status <- 500
-    res$status <- status
-    res$headers <- list("Content-Type" = "application/json")
-    res$body <- jsonlite::toJSON(auto_unbox = TRUE,
-      list(status = status,
-           message = "The plot file does not exist")
-    )
-    return(res)
-  }
-
+as_cadenza_text <- function(res, text) {
   # preparations (NOTE: the body will be concatenated in RAW format to avoid
   # problems with 0x00 in the plot file when converting to CHAR)
-  file_size <- file.size(plotfile)
+  file_size <- nchar(enc2utf8(text))
 
   boundary_raw <- charToRaw(boundary)
 
@@ -73,7 +57,7 @@ as_cadenza_visualization <- function(res, plotfile) {
   {
     \"dataContainers\": [
       {
-        \"type\": \"image/png\",
+        \"type\": \"text/plain\",
         \"name\": \"data\",
         \"columns\": [
         ]
@@ -86,8 +70,8 @@ as_cadenza_visualization <- function(res, plotfile) {
 
   # data header
   data_header_array <- c(
-    glue::glue("Content-Disposition: form-data; name=\"data\"; filename=\"{plotfile}\""), # nolint line length
-    "Content-Type: image/png",
+    glue::glue("Content-Disposition: form-data; name=\"data\"; filename=\"text.txt\""), # nolint line length
+    "Content-Type: text/plain;charset=utf-8",
     glue::glue("Content-Length: {file_size}"),
     "Content-Transfer-Encoding: binary"
   )
@@ -96,7 +80,7 @@ as_cadenza_visualization <- function(res, plotfile) {
                                                   collapse = crlf))
 
   # data reponse
-  data_response_raw <- readBin(plotfile, "raw", file_size)
+  data_response_raw <- charToRaw(text)
 
   # put it all together
   body <- c(boundary_delimiter_raw, boundary_raw, crlf_raw,
@@ -108,9 +92,6 @@ as_cadenza_visualization <- function(res, plotfile) {
     boundary_delimiter_raw, boundary_raw, boundary_delimiter_raw,
     crlf_raw
   )
-
-  # cleanup
-  file.remove(plotfile)
 
   # response headers
   response_headers <- list(
@@ -129,19 +110,19 @@ as_cadenza_visualization <- function(res, plotfile) {
 
 
 #' @describeIn serializers Serialize the multipart-form required by
-#'     Cadenza for visualizations
+#'     Cadenza for text
 #'
 #' @importFrom plumber serializer_octet
 #' @export
 
-serializer_cadenza_visualization <- function(...) { # nolint symbol length
+serializer_cadenza_text <- function(...) { # nolint symbol length
   plumber::serializer_octet(...)
 }
 
 
 
 # register the defined serializer
-register_serializer_visualization_onLoad <- function() { # nolint symbol length + onLoad
-  plumber::register_serializer("cadenza_visualization",
-                               serializer_cadenza_visualization)
+register_serializer_text_onLoad <- function() { # nolint symbol length + onLoad
+  plumber::register_serializer("cadenza_text",
+                               serializer_cadenza_text)
 }

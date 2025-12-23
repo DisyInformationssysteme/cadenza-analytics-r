@@ -36,11 +36,15 @@ function(data, metadata, column_info) {
     pull(name)
 
   # Sum across each row
-  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "ID"
+  colnames(data)[min(which(regexpr(id_column, colnames(data)) > -1))] <- "cadenza_id"
   result <- data |>
-    rowwise("ID") |>
+    rowwise("cadenza_id") |>
     summarise(result = sum(c_across(c(!!!to_sum)))) |>
     ungroup()
 
-  as_cadenza_enrichment_calculation(result)
+  # copy format and aggregation from the first column
+  format <- metadata$dataContainers[[1]]$columns[[2]]$format
+  measureAggregation <- metadata$dataContainers[[1]]$columns[[2]]$measureAggregation
+
+  as_cadenza_enrichment_calculation(result, format=format, measureAggregation=measureAggregation)
 }

@@ -45,7 +45,7 @@
 #' as_cadenza_enrichment_calculation(data_list,
 #'   container_type = c("text/csv", "application/json"))
 
-as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_list, container_type = "text/csv", ...) { # nolint
+as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_list, container_type = "text/csv", measureAggregation = "average", format = "#,##0.00", ...) { # nolint
 
   # Wrap data in a list if it is not already a list
   if (!inherits(data, "list")) {
@@ -55,9 +55,9 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   # name containers
   if (is.null(names(data))) {
     if (length(data) == 1L) {
-      names(data) <- "data"
+      names(data) <- "response-data"
     } else {
-      names(data) <- paste0(rep_len("data", length(data)), "_", seq_along(data))
+      names(data) <- paste0(rep_len("response-data", length(data)), "_", seq_along(data))
     }
   }
 
@@ -65,12 +65,20 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   if (length(container_type) == 1L) {
     container_type <- rep_len(container_type, length.out = length(data))
   }
+  if (length(measureAggregation) == 1L) {
+      measureAggregation <- rep_len(measureAggregation, length.out = length(data))
+  }
+  if (length(format) == 1L) {
+      format <- rep_len(format, length.out = length(data))
+  }
 
   metadata_containers <- purrr::pmap(
     .l = list(
       data = unname(data),
       container_name = names(data),
       container_type = container_type,
+      measureAggregation = measureAggregation,
+      format = format,
       ...
     ),
     .f = data_container_metadata
@@ -80,7 +88,6 @@ as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_lis
   body <- c(
     list(
       metadata = list(
-        parameters = parameters,
         dataContainers = metadata_containers
       )
     ),
@@ -125,6 +132,7 @@ geometry_type <- function(x) {
 # data container metadata
 data_container_metadata <- function(data_container, container_name,
                                     container_type, print_names, role,
+                                    measureAggregation, format,
                                     ...) {
   stopifnot(is.character(container_name))
   stopifnot(is.character(container_type))
@@ -133,25 +141,29 @@ data_container_metadata <- function(data_container, container_name,
   # if no print names are supplied use the names of the dataframe or
   # list inside data
   if (missing(print_names) || is.null(print_names)) {
-    print_names <- names(data_container)
+    print_names <- ifelse(names(data_container) == "cadenza_id",
+                          "ID",
+                          names(data_container))
   } else {
     stopifnot(is.character(print_names))
   }
 
-  data_type <- purrr::map_chr(data_container, cadenza_datatype)
+  data_type <- ifelse(names(data_container) == "cadenza_id",
+                      "int64",
+                      purrr::map_chr(data_container, cadenza_datatype))
   geom_type <- purrr::map_chr(data_container, geometry_type)
 
-  # When the Column name is "ID", take that as the ID column given by Cadenza.
+  # When the Column name is "cadenza_id", take that as the ID column given by Cadenza.
   random_group_name <- stringi::stri_rand_strings(n = 1L, length = 10L) # nolint
 
-  attribute_groupname <- ifelse(names(data_container) == "ID",
+  attribute_groupname <- ifelse(names(data_container) == "cadenza_id",
                                 "net.disy.cadenza.keyAttributeGroup",
-                                random_group_name)
+                                "data")
 
   # Define the role for each column If not specified, will default to
   # role "measure" except when an ID, geometry or string.
   if (missing(role) || is.null(role)) {
-    role <- ifelse(names(data_container) == "ID"
+    role <- ifelse(names(data_container) == "cadenza_id"
                    | data_type %in% c("geometry", "string"),
                    "dimension",
                    "measure")
@@ -165,6 +177,8 @@ data_container_metadata <- function(data_container, container_name,
       printName = print_names,
       attributeGroupName = attribute_groupname,
       role = role,
+      measureAggregation = measureAggregation,
+      format = format,
       dataType = data_type,
       geometryType = geom_type,
       row.names = NULL
@@ -275,6 +289,7 @@ serializer_cadenza_enrichment_calculation <- function(...) { # nolint
             across(everything(), as.character)
           ) |>
           vroom::vroom_format(delim = ";", quote = "all", escape = "double") |>
+          stringi::stri_replace_all(replacement = "", regex = "NA") |>
           stringi::stri_replace_all(replacement = "\r\n", regex = "\n")
       )
     }

@@ -17,5 +17,7 @@
   register_serializer_enrichment_calculation_onLoad()
   register_serializer_visualization_onLoad()
   register_serializer_capabilities_onLoad()
+  register_serializer_text_onLoad()
+  register_serializer_url_onLoad()
   register_serializer_discovery_onLoad()
 }

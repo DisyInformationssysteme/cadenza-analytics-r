@@ -21,13 +21,28 @@ function () {
     extensions = list(
       extension_reference(
         extensionPrintName = "Hello Calculation",
-        extensionType = "calculation",
-        relativePath = "/calculation/hello"
+        extensionType = "data",
+        relativePath = "/data/hello"
       ),
       extension_reference(
         extensionPrintName = "Row Sums",
         extensionType = "enrichment",
         relativePath = "/enrichment/rowSum"
+      ),
+      extension_reference(
+        extensionPrintName = "Static Image",
+        extensionType = "visual",
+        relativePath = "/visualization/staticImage"
+      ),
+      extension_reference(
+        extensionPrintName = "Describe data as text",
+        extensionType = "visual",
+        relativePath = "/text/describe"
+      ),
+      extension_reference(
+        extensionPrintName = "Show the Disy website",
+        extensionType = "visual",
+        relativePath = "/url/website"
       )
     )
   )
