@@ -11,7 +11,7 @@ function() {
       attribute_group(
         name = "data",
         printName = "Data column (ignored)",
-        dataTypes = c("int64", "float64"),
+        dataTypes = c("string", "int64", "float64", "zonedDateTime"),
         minAttributes = 1L,
         maxAttributes = 1L
       )
