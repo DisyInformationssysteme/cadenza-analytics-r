@@ -71,6 +71,6 @@ function(metadata) {
     result <- ifelse(cols == "1",
                      list(data.frame(a = 83110)),
                      list(data.frame(a = 83110, b = 30270)))
-
-  as_cadenza_enrichment_calculation(result, measureAggregation = "average", format = "#,##0.00")
+  # supported measureAggregation: count, countDistinct, sum, average, min, max
+  as_cadenza_enrichment_calculation(result, measureAggregation = "sum", format = "#,##0.00")
 }
