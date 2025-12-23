@@ -36,10 +36,17 @@ function() {
         name = "cols",
         printName = "Please select the number of columns to generate.",
         parameterType = "select",
-        options = c(1, 2),
+        # possible parameter types: string, int64, float64, zonedDateTime, geometry, select, boolean
+        options = c(1, 2), # allowed values for the select
         required = TRUE,
         defaultValue = c("1")
-
+      ),
+      parameter(
+        name = "geo",
+        printName = "Please choose a geometry.",
+        parameterType = "geometry",
+        required = TRUE,
+        requestedSrs = "EPSG:3857" # pseudo mercator, for geometry
       )
     )
   )
@@ -55,6 +62,11 @@ function(metadata) {
     cols <- ifelse(metadata$parameters[[1]]$name == "cols",
                    metadata$parameters[[1]]$value,
                    "1") # default: 1
+    srs <- ifelse(metadata$parameters[[2]]$name == "geo",
+                  metadata$parameters[[2]]$srs,
+                  metadata$parameters[[2]]$name) # default: 1
+    inputColumnName <- metadata$dataContainers[[1]]$columns[[1]]$name
+
     result <- ifelse(cols == "1",
                      list(data.frame(a = 83110)),
                      list(data.frame(a = 83110, b = 30270)))
