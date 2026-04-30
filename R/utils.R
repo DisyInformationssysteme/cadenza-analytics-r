@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+library(fs)
+
 #' Generate Demo Extensions
 #' @export
 create_analytics_extension <- function() {
-  demo_extension_path <- fs::path_package("plumber", package="CadenzaAnalytics")
+  demo_extension_path <- path_package("plumber", package="CadenzaAnalytics")
   files <- list.files(demo_extension_path, recursive = TRUE, full.names = TRUE)
   working_path = getwd()
   created_files <- sapply(files, function(x) {
@@ -36,7 +38,7 @@ create_analytics_extension <- function() {
 
 #' Generate Basic Dockerfile
 create_extension_dockerfile <- function() {
-  dockerfile_path <- fs::path_package("inst", "docker", package="CadenzaAnalytics")
+  dockerfile_path <- path_package("inst", "docker", package="CadenzaAnalytics")
   files <- list.files(dockerfile_path, recursive = TRUE, full.names = TRUE)
   working_path = getwd()
   created_files <- sapply(files, function(x) file.copy(x, gsub(dockerfile_path, working_path, x)))
