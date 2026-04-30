@@ -64,6 +64,26 @@ Start the analytics extension following the content of the file `inst/plumber/an
 source("inst/plumber/analytics_extension.R")
 ```
 
+## Run R CMD check from an R shell
+
+Use https://github.com/r-lib/rcmdcheck to run the check.
+
+```r
+install.packages(".")
+install.packages("rcmdcheck")
+library(rcmdcheck)
+rcmdcheck(".")
+```
+
+## Create, Check and Deploy a release for CRAN
+
+Build the package then check the created tarball.
+
+```shell
+R -e 'install.packages("devtools"); library(devtools); build()'
+R CMD check ../CadenzaAnalytics_0.2.0.tar.gz
+```
+
 ## Update the API documentation
 
 In an R-session run roxygen2 and pkgdown:
@@ -74,6 +94,7 @@ roxygen2::roxygenize()
 pkgdown::build_site()
 ````
 
+To debug documentation creation, you can use `R CMD RD2pdf .`
 
 
 # Defining an Analytics Extension
