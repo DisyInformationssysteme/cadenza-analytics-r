@@ -3,7 +3,7 @@ Title: Create An API For The Cadenza Analytics Extension With Plumber
 Version: 0.2.0
 Authors@R: c(
     person("Matthias", "Theobald", email = "matthias.theobald@disy.net", role = c("aut", "cre")),
-    person("Lossow", "Stefan", email = "stefan.lossow@disy.net", role = c("aut")),
+    person("Lossow", "Stefan", email = "stefan.lossow@disy.net", role = c("aut"), comment = c(ORCID = "0000-0003-2833-0522")),
     person("Herrmann", "Marius", email = "marius.herrmann@disy.net", role = c("aut")),
     person("Babenhauserheide", "Arne", email = "arne.babenhauserheide@disy.net", role = c("aut"), comment = c(ORCID = "0000-0003-1381-8277")),
     person("Disy", role = c("cph"))
