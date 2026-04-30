@@ -3,7 +3,6 @@
 %   R/plumbercadenza-package.R
 \docType{package}
 \name{CadenzaAnalytics-package}
-\alias{CadenzaAnalytics}
 \alias{CadenzaAnalytics-package}
 \title{CadenzaAnalytics: Create An API For The Cadenza Analytics Extension With Plumber}
 \description{

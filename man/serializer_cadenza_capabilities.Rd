@@ -7,7 +7,7 @@
 serializer_cadenza_capabilities(...)
 }
 \arguments{
-\item{extension}{A list of a parameters of the analytics extension.
+\item{...}{extensions, each with a list of a parameters of the analytics extension.
 It requires a printName, extensionType, and attributeGroups.
 It can optionally take parameters.}
 }
@@ -18,11 +18,11 @@ a GetCapabilities response.
 Build the Capabilities GET-response.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 function() {
   extension(
     printName = "Data Generation",
-    extensionType = "calculation",
+    extensionType = "data",
     attributeGroups = list(
       attribute_group(
         name = "datgen",

@@ -21,13 +21,15 @@
 #' @param container_type String: The HTML content type for serializing
 #'     data. Defaults to `"text/csv"`.  If data is a list, supply a
 #'     vector with the content types for each element.
-#' @param role A list of the same length as data with vectors of
-#'     length `ncol(data[[el]])`.  Values `"dimension"` or
+#' @param measureAggregation the measureAggregation to use. Default: "average".
+#' @param format formatting pattern for numbers. Default: "#,##0.00"
+#' @param ... For future expansion: Further arguments passed on to
+#'     generating the metadata for the Cadenza response.  Already
+#'     supported: role A list of the same length as data with vectors
+#'     of length `ncol(data[[el]])`.  Values `"dimension"` or
 #'     `"measure"`, indicating the role for Cadenza.  Default values
 #'     are `"measure"` for each column except IDs, Geometries or
 #'     strings.
-#' @param ... For future expansion: Further arguments passed on to
-#'     generating the metadata for the Cadenza response-
 #' @return List of class `cadenza_response` with elements `metadata`
 #'     and other elements passed in as `data`argument.
 #' @export
@@ -44,7 +46,6 @@
 #' data_list <- list(data, list(param = "a", vec = 1:13))
 #' as_cadenza_enrichment_calculation(data_list,
 #'   container_type = c("text/csv", "application/json"))
-
 as_cadenza_enrichment_calculation <- function(data, parameters = empty_named_list, container_type = "text/csv", measureAggregation = "average", format = "#,##0.00", ...) { # nolint
 
   # Wrap data in a list if it is not already a list

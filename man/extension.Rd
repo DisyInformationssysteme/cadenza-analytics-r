@@ -6,6 +6,9 @@
 \usage{
 extension(...)
 }
+\arguments{
+\item{...}{parameters of the analytics extension. It requires a printName, extensionType, and attributeGroups.}
+}
 \description{
 See the examples in \code{\link[=serializer_cadenza_capabilities]{serializer_cadenza_capabilities()}}.
 }

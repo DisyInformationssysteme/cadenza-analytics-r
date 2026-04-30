@@ -8,6 +8,8 @@ as_cadenza_enrichment_calculation(
   data,
   parameters = empty_named_list,
   container_type = "text/csv",
+  measureAggregation = "average",
+  format = "#,##0.00",
   ...
 )
 }
@@ -22,11 +24,14 @@ empty named list.}
 data. Defaults to \code{"text/csv"}.  If data is a list, supply a
 vector with the content types for each element.}
 
-\item{...}{For future expansion: Further arguments passed on to
-generating the metadata for the Cadenza response-}
+\item{measureAggregation}{the measureAggregation to use. Default: "average".}
 
-\item{role}{A list of the same length as data with vectors of
-length \code{ncol(data[[el]])}.  Values \code{"dimension"} or
+\item{format}{formatting pattern for numbers. Default: "#,##0.00"}
+
+\item{...}{For future expansion: Further arguments passed on to
+generating the metadata for the Cadenza response.  Already
+supported: role A list of the same length as data with vectors
+of length \code{ncol(data[[el]])}.  Values \code{"dimension"} or
 \code{"measure"}, indicating the role for Cadenza.  Default values
 are \code{"measure"} for each column except IDs, Geometries or
 strings.}

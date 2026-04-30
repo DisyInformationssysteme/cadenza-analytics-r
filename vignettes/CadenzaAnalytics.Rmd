@@ -1,3 +1,13 @@
+---
+author: "Disy Informationssysteme GmbH"
+date: "`r Sys.Date()`"
+output: "rmarkdown::html_vignette"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{CadenzaAnalytics}
+  %\usepackage[UTF-8]{inputenc}
+---
+
 **CadenzaAnalytics** is the official package for fast and easy creation of [disy Cadenza](https://www.disy.net/en/products/disy-cadenza/) analytics extensions with R. It enables extending disy Cadenza with advanced analytics using R.
 
 This package is in **beta status**: it can be used for testing, but there

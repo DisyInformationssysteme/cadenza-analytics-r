@@ -14,7 +14,7 @@
 
 #' Build the Capabilities GET-response.
 #'
-#' @param extension A list of a parameters of the analytics extension.
+#' @param ... extensions, each with a list of a parameters of the analytics extension.
 #' It requires a printName, extensionType, and attributeGroups.
 #' It can optionally take parameters.
 #' @return a GetCapabilities response.
@@ -54,6 +54,8 @@ serializer_cadenza_capabilities <- function(...) { # nolint symbol length
 #' The extension description
 #'
 #' See the examples in [serializer_cadenza_capabilities()].
+#'
+#' @param ... parameters of the analytics extension. It requires a printName, extensionType, and attributeGroups.
 #' @export
 extension <- function(...) {
   list(...)
@@ -62,6 +64,8 @@ extension <- function(...) {
 #' A group of attributes used in the extension.
 #'
 #' See the examples in [serializer_cadenza_capabilities()].
+#'
+#' @param ... key value parameters, requires name and printname.
 #' @export
 attribute_group <- function(...) {
   list(...)
@@ -70,6 +74,8 @@ attribute_group <- function(...) {
 #' A parameter that can or must be passed to the extension.
 #'
 #' See the examples in [serializer_cadenza_capabilities()].
+#'
+#' @param ... key value parameters, requires name and printname.
 #' @export
 parameter <- function(...) {
   list(...)

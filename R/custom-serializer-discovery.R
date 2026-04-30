@@ -51,7 +51,7 @@ extension_reference <- function(...) {
 
 #' The description for available extensions
 #'
-#' @param extensions a list of [extension_reference()]'s. For examples, see [serializer_cadenza_discovery()]
+#' @param ... a list of [extension_reference()]'s. For examples, see [serializer_cadenza_discovery()]
 #'
 #' @export
 discovery <- function(...) {

@@ -6,6 +6,9 @@
 \usage{
 attribute_group(...)
 }
+\arguments{
+\item{...}{key value parameters, requires name and printname.}
+}
 \description{
 See the examples in \code{\link[=serializer_cadenza_capabilities]{serializer_cadenza_capabilities()}}.
 }

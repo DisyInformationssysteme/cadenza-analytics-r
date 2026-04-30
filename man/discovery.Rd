@@ -7,7 +7,7 @@
 discovery(...)
 }
 \arguments{
-\item{extensions}{a list of \code{\link[=extension_reference]{extension_reference()}}'s. For examples, see \code{\link[=serializer_cadenza_discovery]{serializer_cadenza_discovery()}}}
+\item{...}{a list of \code{\link[=extension_reference]{extension_reference()}}'s. For examples, see \code{\link[=serializer_cadenza_discovery]{serializer_cadenza_discovery()}}}
 }
 \description{
 The description for available extensions

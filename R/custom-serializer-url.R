@@ -15,7 +15,7 @@
 # static boundary of random characters per run.
 boundary <- stringi::stri_rand_strings(n = 1L, length = 30L)
 
-#' Prepare text results for Cadenza
+#' Prepare url results for Cadenza
 #'
 #' @param res The Plumber response construct
 #' @param text The text created in the Plumber R file
