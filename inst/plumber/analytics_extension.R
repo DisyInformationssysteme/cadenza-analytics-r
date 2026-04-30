@@ -3,6 +3,7 @@ library(plumber)
 
 # Generate a new router as root
 root <- Plumber$new("inst/plumber/discovery.R")
+# pr_set_debug(root, TRUE)
 
 # Locate all the files that are to be mounted onto the router
 l <- as.list(list.files(pattern="plumber.R", recursive=TRUE))
